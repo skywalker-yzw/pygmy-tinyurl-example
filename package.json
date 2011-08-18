@@ -1,0 +1,10 @@
+{
+    "name": "pygmy"
+  , "version": "1.0.0.0"
+  , "private": true
+  , "dependencies": {
+      "express": "2.4.3"
+    , "jade": ">= 0.0.1"
+    , "redis": ">= 0.0.1"
+  }
+}
