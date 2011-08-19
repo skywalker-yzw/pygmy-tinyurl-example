@@ -4,11 +4,11 @@
 
 var express = require('express')
   , redis = require('redis').createClient()
-  , shrinkray = require('./shrinkray.js')
+  , shrinkray = require('./shrinkray/shrinkray.js')
   ;
 
 // Test out our ShrinkRay
-var randomKey = shrinkray.generateKey(10);
+var randomKey = shrinkray.base64encode(10);
 console.log('Generating a random 10 digit key ' + randomKey);
 
 // Initialize the Express App
@@ -48,7 +48,7 @@ app.get('/', function(req, res){
   });
 });
 
-// ----BLL---
+// ----GetKey---
 var getByKey = function(key, error, success) {
   redis.get(key, function(err, data) {
     if(!data) {
@@ -57,7 +57,6 @@ var getByKey = function(key, error, success) {
       }
       return;
     }
-    
     var url = data.toString();
     console.log('Found ' + key + ' with a value of ' + url);
     success(key, url);
@@ -86,10 +85,28 @@ app.get('/confirm/:id', function(req, res){
 // Save New
 app.post('/new', function(req, res) {
   var url = req.body.uri
-    , key = shrinkray.generateKey(10)
+    , idKey = '_lastIdUsed'
     ;
-  redis.set(key, url);
-  res.redirect('/confirm/' + key);
+  
+  redis.get(idKey, function(err,data){
+    var id = 0;
+    
+    if(data) {
+      id = Number(data) + 1;
+    }
+    
+    redis.set(idKey, id);
+    
+    console.log('Next ID is : ' + id);
+    
+    key = shrinkray.base64encode(id);
+    
+    console.log('Key is: ' + key);
+    
+    redis.set(key, url);
+    res.redirect('/confirm/' + key);
+    
+  });
 });
 
 // Find Existing
