@@ -10,6 +10,7 @@ var express = require('express')
   , MainController = require('./controllers/maincontroller.js').MainController(redis, shrinkray, config)
   ;
 
+// Initialize configuration
 config.init();
 
 // Environments
@@ -29,6 +30,7 @@ app.get('/confirm/:id', MainController.Confirm);
 app.post('/new', MainController.New);
 app.get('/:id', MainController.Show);
 
+// Start it up!
 app.listen(3000);
 
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

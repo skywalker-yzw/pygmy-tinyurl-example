@@ -3,7 +3,9 @@ exports.Config = function(app, express){
   
   return {
       Root: ''
+      
     , init: function(){
+      
       app.configure(function(){
         app.set('views', __dirname + '/views');
         app.set('view engine', 'jade');
