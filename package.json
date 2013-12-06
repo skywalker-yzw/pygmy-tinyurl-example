@@ -1,10 +1,24 @@
 {
-    "name": "pygmy"
-  , "version": "1.0.0.0"
-  , "private": true
-  , "dependencies": {
-      "express": "2.4.3"
-    , "jade": ">= 0.0.1"
-    , "redis": ">= 0.0.1"
+  "name": "pygmy-tinyurl-example",
+  "version": "0.0.0",
+  "description": "Pygmy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xeb/pygmy-tinyurl-example.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/xeb/pygmy-tinyurl-example/issues"
+  },
+  "homepage": "https://github.com/xeb/pygmy-tinyurl-example",
+  "dependencies": {
+    "express": "~3.4.6",
+    "redis": "~0.9.1",
+    "jade": "~0.35.0"
   }
 }

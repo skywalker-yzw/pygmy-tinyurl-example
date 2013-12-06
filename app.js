@@ -3,7 +3,7 @@
  */
 
 var express = require('express')
-  , app = module.exports = express.createServer()
+  , app = module.exports = express()
   , redis = require('redis').createClient()
   , config = require('./config.js').Config(app, express)
   , shrinkray = require('./modules/shrinkray.js')
@@ -33,4 +33,4 @@ app.get('/:id', MainController.Show);
 // Start it up!
 app.listen(3000);
 
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening in %s mode", app.settings.env);
